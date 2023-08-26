@@ -1,6 +1,9 @@
 ﻿using PokemonReviewApp.Data;
 using PokemonReviewApp.Models;
 
+//Navigate to C:\Users\Zacha\Desktop\pokemon-review-api\PokemonReviewApp\PokemonReviewApp
+//Execute dotnet run seeddata
+
 namespace PokemonReviewApp
 {
     public class Seed
