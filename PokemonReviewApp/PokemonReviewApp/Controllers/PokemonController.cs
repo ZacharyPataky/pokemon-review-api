@@ -61,7 +61,5 @@ public class PokemonController : Controller
             return BadRequest(ModelState);
 
         return Ok(rating);
-
-
     }
 }
