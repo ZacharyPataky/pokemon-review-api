@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using PokemonReviewApp.Dto;
 using PokemonReviewApp.Interfaces;
 using PokemonReviewApp.Models;
-using PokemonReviewApp.Repository;
 
 namespace PokemonReviewApp.Controllers;
 
@@ -32,15 +31,15 @@ public class CountryController : Controller
         return Ok(countries);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{countryId}")]
     [ProducesResponseType(200, Type = typeof(Country))]
     [ProducesResponseType(400)]
-    public IActionResult GetCountry(int id)
+    public IActionResult GetCountry(int countryId)
     {
-        if (!_countryRepository.CountryExists(id))
+        if (!_countryRepository.CountryExists(countryId))
             return NotFound();
 
-        var country = _mapper.Map<PokemonDto>(_countryRepository.GetCountry(id));
+        var country = _mapper.Map<PokemonDto>(_countryRepository.GetCountry(countryId));
 
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

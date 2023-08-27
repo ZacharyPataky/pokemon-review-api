@@ -31,10 +31,10 @@ public class CategoryRepository : ICategoryRepository
             .FirstOrDefault();
     }
 
-    public ICollection<Pokemon> GetPokemonByCategory(int id)
+    public ICollection<Pokemon> GetPokemonByCategory(int categoryId)
     {
         return _context.PokemonCategories
-            .Where(c => c.CategoryId == id)
+            .Where(c => c.CategoryId == categoryId)
             .Select(c => c.Pokemon)
             .ToList();
     }

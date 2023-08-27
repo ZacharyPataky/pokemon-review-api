@@ -31,15 +31,15 @@ public class PokemonController : Controller
         return Ok(pokemons);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{pokeId}")]
     [ProducesResponseType(200, Type=typeof(Pokemon))]
     [ProducesResponseType(400)]
-    public IActionResult GetPokemon(int id)
+    public IActionResult GetPokemon(int pokeId)
     {
-        if (!_pokemonRepository.PokemonExists(id))
+        if (!_pokemonRepository.PokemonExists(pokeId))
             return NotFound();
 
-        var pokemon = _mapper.Map<PokemonDto>(_pokemonRepository.GetPokemon(id));
+        var pokemon = _mapper.Map<PokemonDto>(_pokemonRepository.GetPokemon(pokeId));
 
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -47,15 +47,15 @@ public class PokemonController : Controller
         return Ok(pokemon);
     }
 
-    [HttpGet("{id}/rating")]
+    [HttpGet("{pokeId}/rating")]
     [ProducesResponseType(200, Type = typeof(decimal))]
     [ProducesResponseType(400)]
-    public IActionResult GetPokemonRating(int id)
+    public IActionResult GetPokemonRating(int pokeId)
     {
-        if (!_pokemonRepository.PokemonExists(id))
+        if (!_pokemonRepository.PokemonExists(pokeId))
             return NotFound();
 
-        decimal rating = _pokemonRepository.GetPokemonRating(id);
+        decimal rating = _pokemonRepository.GetPokemonRating(pokeId);
 
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

@@ -13,24 +13,24 @@ public class PokemonRepository : IPokemonRepository
         _context = context;
     }
 
-    public Pokemon GetPokemon(int id)
+    public Pokemon GetPokemon(int pokeId)
     {
         return _context.Pokemon
-            .Where(p => p.Id == id)
+            .Where(p => p.Id == pokeId)
             .FirstOrDefault();
     }
 
-    public Pokemon GetPokemon(string name)
+    public Pokemon GetPokemon(string pokeName)
     {
         return _context.Pokemon
-            .Where(p => p.Name == name)
+            .Where(p => p.Name == pokeName)
             .FirstOrDefault();
     }
 
-    public decimal GetPokemonRating(int id)
+    public decimal GetPokemonRating(int pokeId)
     {
         IQueryable<Review> review = _context.Reviews
-            .Where(p => p.Pokemon.Id == id);
+            .Where(p => p.Pokemon.Id == pokeId);
 
         if (review.Count() <= 0)
             return 0;
@@ -45,9 +45,9 @@ public class PokemonRepository : IPokemonRepository
             .ToList();
     }
 
-    public bool PokemonExists(int id)
+    public bool PokemonExists(int pokeId)
     {
         return _context.Pokemon
-            .Any(p => p.Id == id);
+            .Any(p => p.Id == pokeId);
     }
 }

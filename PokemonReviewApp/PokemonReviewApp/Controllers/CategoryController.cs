@@ -31,15 +31,15 @@ public class CategoryController : Controller
         return Ok(categories);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{categoryId}")]
     [ProducesResponseType(200, Type = typeof(Category))]
     [ProducesResponseType(400)]
-    public IActionResult GetCategory(int id)
+    public IActionResult GetCategory(int categoryId)
     {
-        if (!_categoryRepository.CategoryExists(id))
+        if (!_categoryRepository.CategoryExists(categoryId))
             return NotFound();
 
-        var category = _mapper.Map<CategoryDto>(_categoryRepository.GetCategory(id));
+        var category = _mapper.Map<CategoryDto>(_categoryRepository.GetCategory(categoryId));
 
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
