@@ -123,4 +123,24 @@ public class ReviewerController : Controller
 
         return NoContent();
     }
+
+    [HttpDelete("{reviewerId}")]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(404)]
+    public IActionResult DeleteReviewer(int reviewerId)
+    {
+        if (!_reviewerRepository.ReviewerExists(reviewerId))
+            return NotFound();
+
+        var reviewerToDelete = _reviewerRepository.GetReviewer(reviewerId);
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        if (!_reviewerRepository.DeleteReviewer(reviewerToDelete))
+            ModelState.AddModelError("", "Something went wrong while deleting");
+
+        return NoContent();
+    }
 }

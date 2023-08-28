@@ -44,6 +44,12 @@ public class PokemonRepository : IPokemonRepository
         return Save();
     }
 
+    public bool DeletePokemon(Pokemon pokemon)
+    {
+        _context.Remove(pokemon);
+        return Save();
+    }
+
     public Pokemon GetPokemon(int pokeId)
     {
         return _context.Pokemon
